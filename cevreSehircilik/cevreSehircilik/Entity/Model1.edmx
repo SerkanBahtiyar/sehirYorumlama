@@ -1,0 +1,354 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="cevreSehircilikModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tblAdmin">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kullaniciAdi" Type="varchar" MaxLength="20" />
+          <Property Name="sifre" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="tblHakkimizda">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="aciklama" Type="varchar" MaxLength="5000" />
+        </EntityType>
+        <EntityType Name="tbliletisim">
+          <Key>
+            <PropertyRef Name="mesajid" />
+          </Key>
+          <Property Name="mesajid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="adSoyad" Type="varchar" MaxLength="50" />
+          <Property Name="mail" Type="varchar" MaxLength="50" />
+          <Property Name="telefon" Type="varchar" MaxLength="50" />
+          <Property Name="konu" Type="varchar" MaxLength="50" />
+          <Property Name="mesaj" Type="varchar" MaxLength="1000" />
+        </EntityType>
+        <EntityType Name="tblKategori">
+          <Key>
+            <PropertyRef Name="kategoriid" />
+          </Key>
+          <Property Name="kategoriid" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kategoriAd" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="tblsehir">
+          <Key>
+            <PropertyRef Name="sehirid" />
+          </Key>
+          <Property Name="sehirid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sehirBaslik" Type="nvarchar" MaxLength="100" />
+          <Property Name="sehirIcerik" Type="nvarchar" MaxLength="100" />
+          <Property Name="sehirTarih" Type="smalldatetime" />
+          <Property Name="sehirGorsel" Type="varchar" MaxLength="100" />
+          <Property Name="sehirTur" Type="tinyint" />
+          <Property Name="sehirKategori" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="tblTur">
+          <Key>
+            <PropertyRef Name="turid" />
+          </Key>
+          <Property Name="turid" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="turAd" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="tblYorum">
+          <Key>
+            <PropertyRef Name="yorumid" />
+          </Key>
+          <Property Name="yorumid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kisiAd" Type="varchar" MaxLength="20" />
+          <Property Name="mail" Type="varchar" MaxLength="50" />
+          <Property Name="yorumicerik" Type="varchar" MaxLength="500" />
+          <Property Name="yorumSehir" Type="int" />
+        </EntityType>
+        <Association Name="FK_tblsehir_tblKategori">
+          <End Role="tblKategori" Type="Self.tblKategori" Multiplicity="0..1" />
+          <End Role="tblsehir" Type="Self.tblsehir" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblKategori">
+              <PropertyRef Name="kategoriid" />
+            </Principal>
+            <Dependent Role="tblsehir">
+              <PropertyRef Name="sehirKategori" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblsehir_tblTur">
+          <End Role="tblTur" Type="Self.tblTur" Multiplicity="0..1" />
+          <End Role="tblsehir" Type="Self.tblsehir" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTur">
+              <PropertyRef Name="turid" />
+            </Principal>
+            <Dependent Role="tblsehir">
+              <PropertyRef Name="sehirTur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblYorum_tblsehir">
+          <End Role="tblsehir" Type="Self.tblsehir" Multiplicity="0..1" />
+          <End Role="tblYorum" Type="Self.tblYorum" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblsehir">
+              <PropertyRef Name="sehirid" />
+            </Principal>
+            <Dependent Role="tblYorum">
+              <PropertyRef Name="yorumSehir" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="cevreSehircilikModelStoreContainer">
+          <EntitySet Name="tblAdmin" EntityType="Self.tblAdmin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblHakkimizda" EntityType="Self.tblHakkimizda" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbliletisim" EntityType="Self.tbliletisim" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblKategori" EntityType="Self.tblKategori" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblsehir" EntityType="Self.tblsehir" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblTur" EntityType="Self.tblTur" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblYorum" EntityType="Self.tblYorum" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tblsehir_tblKategori" Association="Self.FK_tblsehir_tblKategori">
+            <End Role="tblKategori" EntitySet="tblKategori" />
+            <End Role="tblsehir" EntitySet="tblsehir" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblsehir_tblTur" Association="Self.FK_tblsehir_tblTur">
+            <End Role="tblTur" EntitySet="tblTur" />
+            <End Role="tblsehir" EntitySet="tblsehir" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblYorum_tblsehir" Association="Self.FK_tblYorum_tblsehir">
+            <End Role="tblsehir" EntitySet="tblsehir" />
+            <End Role="tblYorum" EntitySet="tblYorum" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="cevreSehircilikModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tblHakkimizda">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="aciklama" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tbliletisim">
+          <Key>
+            <PropertyRef Name="mesajid" />
+          </Key>
+          <Property Name="mesajid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="adSoyad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="mail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="telefon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="konu" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="mesaj" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tblKategori">
+          <Key>
+            <PropertyRef Name="kategoriid" />
+          </Key>
+          <Property Name="kategoriid" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="kategoriAd" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblsehir" Relationship="Self.FK_tblsehir_tblKategori" FromRole="tblKategori" ToRole="tblsehir" />
+        </EntityType>
+        <EntityType Name="tblsehir">
+          <Key>
+            <PropertyRef Name="sehirid" />
+          </Key>
+          <Property Name="sehirid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sehirBaslik" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="sehirIcerik" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="sehirTarih" Type="DateTime" Precision="0" />
+          <Property Name="sehirGorsel" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="sehirTur" Type="Byte" />
+          <Property Name="sehirKategori" Type="Byte" />
+          <NavigationProperty Name="tblKategori" Relationship="Self.FK_tblsehir_tblKategori" FromRole="tblsehir" ToRole="tblKategori" />
+          <NavigationProperty Name="tblTur" Relationship="Self.FK_tblsehir_tblTur" FromRole="tblsehir" ToRole="tblTur" />
+          <NavigationProperty Name="tblYorum" Relationship="Self.FK_tblYorum_tblsehir" FromRole="tblsehir" ToRole="tblYorum" />
+        </EntityType>
+        <EntityType Name="tblTur">
+          <Key>
+            <PropertyRef Name="turid" />
+          </Key>
+          <Property Name="turid" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="turAd" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblsehir" Relationship="Self.FK_tblsehir_tblTur" FromRole="tblTur" ToRole="tblsehir" />
+        </EntityType>
+        <EntityType Name="tblYorum">
+          <Key>
+            <PropertyRef Name="yorumid" />
+          </Key>
+          <Property Name="yorumid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="kisiAd" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="mail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="yorumicerik" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="yorumSehir" Type="Int32" />
+          <NavigationProperty Name="tblsehir" Relationship="Self.FK_tblYorum_tblsehir" FromRole="tblYorum" ToRole="tblsehir" />
+        </EntityType>
+        <Association Name="FK_tblsehir_tblKategori">
+          <End Role="tblKategori" Type="Self.tblKategori" Multiplicity="0..1" />
+          <End Role="tblsehir" Type="Self.tblsehir" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblKategori">
+              <PropertyRef Name="kategoriid" />
+            </Principal>
+            <Dependent Role="tblsehir">
+              <PropertyRef Name="sehirKategori" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblsehir_tblTur">
+          <End Role="tblTur" Type="Self.tblTur" Multiplicity="0..1" />
+          <End Role="tblsehir" Type="Self.tblsehir" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblTur">
+              <PropertyRef Name="turid" />
+            </Principal>
+            <Dependent Role="tblsehir">
+              <PropertyRef Name="sehirTur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblYorum_tblsehir">
+          <End Role="tblsehir" Type="Self.tblsehir" Multiplicity="0..1" />
+          <End Role="tblYorum" Type="Self.tblYorum" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblsehir">
+              <PropertyRef Name="sehirid" />
+            </Principal>
+            <Dependent Role="tblYorum">
+              <PropertyRef Name="yorumSehir" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="cevreSehircilikEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblHakkimizda" EntityType="Self.tblHakkimizda" />
+          <EntitySet Name="tbliletisim" EntityType="Self.tbliletisim" />
+          <EntitySet Name="tblKategori" EntityType="Self.tblKategori" />
+          <EntitySet Name="tblsehir" EntityType="Self.tblsehir" />
+          <EntitySet Name="tblTur" EntityType="Self.tblTur" />
+          <EntitySet Name="tblYorum" EntityType="Self.tblYorum" />
+          <AssociationSet Name="FK_tblsehir_tblKategori" Association="Self.FK_tblsehir_tblKategori">
+            <End Role="tblKategori" EntitySet="tblKategori" />
+            <End Role="tblsehir" EntitySet="tblsehir" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblsehir_tblTur" Association="Self.FK_tblsehir_tblTur">
+            <End Role="tblTur" EntitySet="tblTur" />
+            <End Role="tblsehir" EntitySet="tblsehir" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblYorum_tblsehir" Association="Self.FK_tblYorum_tblsehir">
+            <End Role="tblsehir" EntitySet="tblsehir" />
+            <End Role="tblYorum" EntitySet="tblYorum" />
+          </AssociationSet>
+          <EntitySet Name="tblAdmin" EntityType="cevreSehircilikModel.tblAdmin" />
+        </EntityContainer>
+        <EntityType Name="tblAdmin">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="kullaniciAdi" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="sifre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="cevreSehircilikModelStoreContainer" CdmEntityContainer="cevreSehircilikEntities">
+          <EntitySetMapping Name="tblHakkimizda">
+            <EntityTypeMapping TypeName="cevreSehircilikModel.tblHakkimizda">
+              <MappingFragment StoreEntitySet="tblHakkimizda">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="aciklama" ColumnName="aciklama" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbliletisim">
+            <EntityTypeMapping TypeName="cevreSehircilikModel.tbliletisim">
+              <MappingFragment StoreEntitySet="tbliletisim">
+                <ScalarProperty Name="mesajid" ColumnName="mesajid" />
+                <ScalarProperty Name="adSoyad" ColumnName="adSoyad" />
+                <ScalarProperty Name="mail" ColumnName="mail" />
+                <ScalarProperty Name="telefon" ColumnName="telefon" />
+                <ScalarProperty Name="konu" ColumnName="konu" />
+                <ScalarProperty Name="mesaj" ColumnName="mesaj" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblKategori">
+            <EntityTypeMapping TypeName="cevreSehircilikModel.tblKategori">
+              <MappingFragment StoreEntitySet="tblKategori">
+                <ScalarProperty Name="kategoriid" ColumnName="kategoriid" />
+                <ScalarProperty Name="kategoriAd" ColumnName="kategoriAd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblsehir">
+            <EntityTypeMapping TypeName="cevreSehircilikModel.tblsehir">
+              <MappingFragment StoreEntitySet="tblsehir">
+                <ScalarProperty Name="sehirid" ColumnName="sehirid" />
+                <ScalarProperty Name="sehirBaslik" ColumnName="sehirBaslik" />
+                <ScalarProperty Name="sehirIcerik" ColumnName="sehirIcerik" />
+                <ScalarProperty Name="sehirTarih" ColumnName="sehirTarih" />
+                <ScalarProperty Name="sehirGorsel" ColumnName="sehirGorsel" />
+                <ScalarProperty Name="sehirTur" ColumnName="sehirTur" />
+                <ScalarProperty Name="sehirKategori" ColumnName="sehirKategori" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblTur">
+            <EntityTypeMapping TypeName="cevreSehircilikModel.tblTur">
+              <MappingFragment StoreEntitySet="tblTur">
+                <ScalarProperty Name="turid" ColumnName="turid" />
+                <ScalarProperty Name="turAd" ColumnName="turAd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblYorum">
+            <EntityTypeMapping TypeName="cevreSehircilikModel.tblYorum">
+              <MappingFragment StoreEntitySet="tblYorum">
+                <ScalarProperty Name="yorumid" ColumnName="yorumid" />
+                <ScalarProperty Name="kisiAd" ColumnName="kisiAd" />
+                <ScalarProperty Name="mail" ColumnName="mail" />
+                <ScalarProperty Name="yorumicerik" ColumnName="yorumicerik" />
+                <ScalarProperty Name="yorumSehir" ColumnName="yorumSehir" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblAdmin">
+            <EntityTypeMapping TypeName="cevreSehircilikModel.tblAdmin">
+              <MappingFragment StoreEntitySet="tblAdmin">
+                <ScalarProperty Name="sifre" ColumnName="sifre" />
+                <ScalarProperty Name="kullaniciAdi" ColumnName="kullaniciAdi" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="cevreSehircilikModelStoreContainer" CdmEntityContainer="cevreSehircilikEntities">
+    <EntitySetMapping Name="tblHakkimizda">
+      <EntityTypeMapping TypeName="cevreSehircilikModel.tblHakkimizda">
+        <MappingFragment StoreEntitySet="tblHakkimizda">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="aciklama" ColumnName="aciklama" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbliletisim">
+      <EntityTypeMapping TypeName="cevreSehircilikModel.tbliletisim">
+        <MappingFragment StoreEntitySet="tbliletisim">
+          <ScalarProperty Name="mesajid" ColumnName="mesajid" />
+          <ScalarProperty Name="adSoyad" ColumnName="adSoyad" />
+          <ScalarProperty Name="mail" ColumnName="mail" />
+          <ScalarProperty Name="telefon" ColumnName="telefon" />
+          <ScalarProperty Name="konu" ColumnName="konu" />
+          <ScalarProperty Name="mesaj" ColumnName="mesaj" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblKategori">
+      <EntityTypeMapping TypeName="cevreSehircilikModel.tblKategori">
+        <MappingFragment StoreEntitySet="tblKategori">
+          <ScalarProperty Name="kategoriid" ColumnName="kategoriid" />
+          <ScalarProperty Name="kategoriAd" ColumnName="kategoriAd" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblsehir">
+      <EntityTypeMapping TypeName="cevreSehircilikModel.tblsehir">
+        <MappingFragment StoreEntitySet="tblsehir">
+          <ScalarProperty Name="sehirid" ColumnName="sehirid" />
+          <ScalarProperty Name="sehirBaslik" ColumnName="sehirBaslik" />
+          <ScalarProperty Name="sehirIcerik" ColumnName="sehirIcerik" />
+          <ScalarProperty Name="sehirTarih" ColumnName="sehirTarih" />
+          <ScalarProperty Name="sehirGorsel" ColumnName="sehirGorsel" />
+          <ScalarProperty Name="sehirTur" ColumnName="sehirTur" />
+          <ScalarProperty Name="sehirKategori" ColumnName="sehirKategori" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblTur">
+      <EntityTypeMapping TypeName="cevreSehircilikModel.tblTur">
+        <MappingFragment StoreEntitySet="tblTur">
+          <ScalarProperty Name="turid" ColumnName="turid" />
+          <ScalarProperty Name="turAd" ColumnName="turAd" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblYorum">
+      <EntityTypeMapping TypeName="cevreSehircilikModel.tblYorum">
+        <MappingFragment StoreEntitySet="tblYorum">
+          <ScalarProperty Name="yorumid" ColumnName="yorumid" />
+          <ScalarProperty Name="kisiAd" ColumnName="kisiAd" />
+          <ScalarProperty Name="mail" ColumnName="mail" />
+          <ScalarProperty Name="yorumicerik" ColumnName="yorumicerik" />
+          <ScalarProperty Name="yorumSehir" ColumnName="yorumSehir" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblAdmin">
+      <EntityTypeMapping TypeName="cevreSehircilikModel.tblAdmin">
+        <MappingFragment StoreEntitySet="tblAdmin">
+          <ScalarProperty Name="sifre" ColumnName="sifre" />
+          <ScalarProperty Name="kullaniciAdi" ColumnName="kullaniciAdi" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
